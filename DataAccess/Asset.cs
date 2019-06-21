@@ -14,7 +14,7 @@ namespace PortfolioBuffett.DataAccess
         private readonly AmazonDynamoDBClient DbClient;
         private readonly string AssetTableName = "Assets";
 
-        public Asset(bool local)
+        public Asset(bool local, string awsAccessKeyId = null, string awsSecretAccessKey = null)
         {
             
             if (local) {
@@ -23,7 +23,7 @@ namespace PortfolioBuffett.DataAccess
                 DbClient = new AmazonDynamoDBClient(clientConfig);
             }
             else {
-                DbClient = new AmazonDynamoDBClient(RegionEndpoint.USWest2);
+                DbClient = new AmazonDynamoDBClient(awsAccessKeyId, awsSecretAccessKey, RegionEndpoint.USWest2);
             }
         }
 
